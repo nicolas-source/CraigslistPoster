@@ -1,4 +1,4 @@
-from gmail import Gmail
+# from gmail import Gmail
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait  # available since 2.4.0
@@ -9,7 +9,7 @@ import os
 import shutil
 from inspect import getsourcefile
 from os.path import abspath
-from gmail import Gmail
+# from gmail import Gmail
 # import gmail
 from datetime import date
 from PIL import Image
@@ -158,7 +158,7 @@ def postListing(listing):
 
 
 # --------------------------- Emails ---------------------
-
+"""
 def getFirstCraigslistEmailUrl(listing, emails):
     for email in emails:
         email.fetch()
@@ -195,6 +195,10 @@ def acceptEmailTerms(listing):
 
     g.logout()
     print("Done Checking Email")
+"""
+
+
+# --------------------------- ezgmail ---------------------
 
 
 # --------------------------- Craigslist Posting Actions ---------------
@@ -281,8 +285,8 @@ for listingFolder in listingFolders:
     listing.images = getOrderedListingImages(listingFolder)
     listing.driver = webdriver.Chrome(chromedriver)
     listing.driver.get("https://post.craigslist.org/c/" + listing.loc + "?lang=en")
-    # postListing(listing)
-    acceptEmailTerms(listing)
+    postListing(listing)
+    # acceptEmailTerms(listing)
     moveFolder(listingFolder, listedFolderDirectory)
     listing.driver.close()
     time.sleep(120)
