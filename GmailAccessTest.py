@@ -3,7 +3,7 @@ import re
 
 
 unreadThreads = ezgmail.unread()
-ezgmail.summary(unreadThreads)
+# print(ezgmail.summary(unreadThreads))
 # print(unreadThreads[0].messages[0].body)
 
 
@@ -18,7 +18,11 @@ def FindLink(string):
 
 # for emails in
 
+for x in unreadThreads:
+    print("Urls in email: ", FindLink(x.messages[0].body))
+    
+
 # print("Urls in email: ", FindLink(unreadThreads[0].messages[0].body))
 
 
-print(unreadThreads)
+# print(unreadThreads)

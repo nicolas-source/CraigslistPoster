@@ -71,16 +71,16 @@ def clickClassImageUploader(listing):
 
 def clickListingType(listing):
     # listing.driver.find_element_by_xpath(
-    #     "//*[@id='pagecontainer']/section/form//label[contains(.,'" + listing.type + "')]/input").click()
+    #     "/html/body/article/section/form/ul/li[6]/label/span[1][contains(.,'" + listing.type + "')]/input").click()
     listing.driver.find_element_by_xpath(
         "/html/body/article/section/form/ul/li[6]/label/span[1]/input").click()
 
 
 def clickListingCategory(listing):
-    # listing.driver.find_element_by_xpath(
-    #     "//*[@id='pagecontainer']/section/form/blockquote//label[contains(.,'" + listing.category + "')]/input").click()
     listing.driver.find_element_by_xpath(
-        "/html/body/article/section/form/div/div/label/label[21]/input").click()
+        "/html/body/article/section/form/div/div/label/label[contains(.,'" + listing.category + "')]/input").click()
+    # listing.driver.find_element_by_xpath(
+    #     "/html/body/article/section/form/div/div/label/label[21]/input").click()
 
 
 def uploadImagePath(listing, image):
@@ -211,7 +211,10 @@ def moveFolder(folder, listedFolderDirectory):
 
     # Make todays date under the listed directory
     # makeFolder(today_dir)
-    os.mkdir(today_dir)
+    try:
+        os.mkdir(today_dir)
+    except FileExistsError:
+        print("dir exists")
     # Move the folder to the listed todays date directory
     shutil.move(folder, today_dir)
 
@@ -289,6 +292,6 @@ for listingFolder in listingFolders:
     # acceptEmailTerms(listing)
     moveFolder(listingFolder, listedFolderDirectory)
     listing.driver.close()
-    time.sleep(120)
+    time.sleep(20)
     print("Waiting 2 minutes")
 print("No More Craiglist Items To List")
